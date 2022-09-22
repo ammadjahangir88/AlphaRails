@@ -6,7 +6,7 @@ class User < ApplicationRecord
   # validates :username, presence: true, uniqueness: { case_sensitive: false }
   # # app/models/user.rb
   validate :validate_username
-
+  has_and_belongs_to_many :groups
   def validate_username
     if User.where(email: username).exists?
       errors.add(:username, :invalid)
