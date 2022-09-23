@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, authentication_keys: [:login]
   # validates :username, presence: true, uniqueness: { case_sensitive: false }
   # # app/models/user.rb
+  has_many :articles
   validate :validate_username
   has_and_belongs_to_many :groups
   def validate_username
