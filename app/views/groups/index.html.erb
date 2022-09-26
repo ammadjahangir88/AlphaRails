@@ -1,12 +1,36 @@
 <% @group.each do |group| %>
 
-    <div class="row">
+    <div style="display:flex; flex-direction:row">
     
-   
-    
-    <%= link_to group.name, group_path(group) %>
 
-    <p> <%= group.name %>   </p>
+    <%= link_to group.name, group_path(group) %>
+    
+     <p style="margin-left:20px">
+     <% if group.id != 1 %>
+      
+     <% x=group.users.where(id: current_user.id)%>
+     
+    
+
+     <% if current_user != x[0]%>
+       <%= link_to "Join this group", join_path %>
+
+        <% else %>
+        You have already joined this group
+
+       
+       <% end %>  </p>
+
+    
+
+     <% end %>
+     
+     
+    
+    
+    <p style="margin-left:20px"> <%= group.name %>   </p>
+    <p style="margin-left:20px"> <%= group.user.user_name %>   </p>
+    
     
     </div>
     

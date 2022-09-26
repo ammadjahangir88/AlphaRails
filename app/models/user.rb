@@ -6,11 +6,13 @@ class User < ApplicationRecord
   # validates :username, presence: true, uniqueness: { case_sensitive: false }
   # # app/models/user.rb
   has_many :articles
+  has_many :groups
   validate :validate_username
-  has_and_belongs_to_many :groups
+  has_many :user_groups
+  has_many :groups, through: :user_groups
   def validate_username
-    if User.where(email: username).exists?
-      errors.add(:username, :invalid)
+    if User.where(email: user_name).exists?
+      errors.add(:user_name, :invalid)
     end
   end
 
@@ -23,7 +25,7 @@ class User < ApplicationRecord
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))
-      where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      where(conditions.to_h).where(["lower(user_name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end

@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.group=Group.find(1)
+    @article.group=Group.find(2)
     @article.user= current_user
         respond_to do |format|
         if @article.save

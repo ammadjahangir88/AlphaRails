@@ -28,6 +28,20 @@ class GroupsController < ApplicationController
     end
 
   end
+  def join
+    @group= Group.find(4)
+    @join = @group.user_groups.build(:user_id => current_user.id)
+    respond_to do |format|
+      if @join.save
+        format.html { redirect_to(group_path(@group), :notice => "You have joined this group.") }
+        
+      else
+        format.html { redirect_to(group_path(@group), :notice => "You have alreadu joined this group.") }
+        format.xml { render :xml => group_path(@group), :status => :unprocessable_entity }
+      end
+    end
+  end
+    
 
  
 
@@ -37,5 +51,5 @@ class GroupsController < ApplicationController
   private
   def group_params
     params.require(:group).permit(:name,:grouptype)
-end
+  end
 end

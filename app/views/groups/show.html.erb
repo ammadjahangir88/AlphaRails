@@ -1,4 +1,5 @@
 <h1>Articles listed that are created in Groups </h1>
+<% if current_user == @group.user%>
 <%= link_to "New Article", new_article_path %>
-
+ <% end %>
 <%= render 'articles/article', obj: @group.articles %>

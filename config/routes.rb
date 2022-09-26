@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   # root "articles#index"
    root  'welcome#home'
 
-   
-   resources :users
+   get 'join', to: 'groups#join'
+   resources :users do
+      
+
+   end
 
    resources :groups
 
