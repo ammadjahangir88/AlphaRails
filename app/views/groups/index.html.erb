@@ -13,7 +13,17 @@
     
 
      <% if current_user != x[0]%>
+
+       <%  if group.grouptype=='Public' %> 
+
        <%= link_to "Join this group", join_path %>
+       <% elsif group.grouptype=='Private' %>
+         <%= link_to "Join this private group", join_path %>
+
+      
+       <% end %>
+    
+
 
         <% else %>
         You have already joined this group
@@ -29,6 +39,7 @@
     
     
     <p style="margin-left:20px"> <%= group.name %>   </p>
+     <p style="margin-left:20px"> <%= group.grouptype %>   </p>
     <p style="margin-left:20px"> <%= group.user.user_name %>   </p>
     
     

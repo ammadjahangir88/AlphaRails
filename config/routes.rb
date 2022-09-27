@@ -12,6 +12,7 @@ Rails.application.routes.draw do
    root  'welcome#home'
 
    get 'join', to: 'groups#join'
+   get 'join', to: 'groups#join'
    resources :users do
       
 

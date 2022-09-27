@@ -20,13 +20,7 @@ class User < ApplicationRecord
 
   def login
     @login || self.user_name || self.email
-  end
-
-  def self.find_for_database_authentication(warden_conditions)
-    conditions = warden_conditions.dup
-    if (login = conditions.delete(:login))
-      where(conditions.to_h).where(["lower(user_name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-    elsif conditions.has_key?(:username) || conditions.has_key?(:email)
+  endx=group.users.where(id: current_user.id)(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end
   end

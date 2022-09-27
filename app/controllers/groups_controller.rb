@@ -18,6 +18,9 @@ class GroupsController < ApplicationController
   def create
 
     @group = Group.new(group_params)
+
+    @group.user=current_user
+    @join = @group.user_groups.build(:user_id => current_user.id)
     respond_to do |format|
       if @group.save
         # session[:user_id] = @user.id
