@@ -12,12 +12,17 @@ Rails.application.routes.draw do
    root  'welcome#home'
 
    get 'join', to: 'groups#join'
-   get 'join', to: 'groups#join'
+   get 'joingroup', to: 'groups#joingroup'
    resources :users do
       
 
    end
-
+   get 'view', to: 'groups#view'
+   get 'approve', to: 'groups#approve'
+   get 'accept', to: 'groups#accept'
+   get 'accept', to: 'groups#accept'
+   get 'delete', to: 'groups#delete'
+    
    resources :groups
 
    resources :articles

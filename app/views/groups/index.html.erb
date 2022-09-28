@@ -11,14 +11,14 @@
      <% x=group.users.where(id: current_user.id)%>
      
     
-
+   
      <% if current_user != x[0]%>
 
        <%  if group.grouptype=='Public' %> 
 
        <%= link_to "Join this group", join_path %>
        <% elsif group.grouptype=='Private' %>
-         <%= link_to "Join this private group", join_path %>
+         <%= link_to "Join this private group", joingroup_path %>
 
       
        <% end %>

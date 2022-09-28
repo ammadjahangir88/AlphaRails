@@ -44,10 +44,49 @@ class GroupsController < ApplicationController
       end
     end
   end
+  def joingroup
+    @group= Group.find(9)
+    @join = @group.user_groups.build(:user_id => current_user.id)
+    @join.request=false
+
+    respond_to do |format|
+      if @join.save
+        format.html { redirect_to(group_path(@group), :notice => "You have joined this group.") }
+        
+      else
+        format.html { redirect_to(group_path(@group), :notice => "You have alreadu joined this group.") }
+        format.xml { render :xml => group_path(@group), :status => :unprocessable_entity }
+      end
+    end
+
+
+
+  end
+  def approve
+    @group= Group.find(9)
+  
+  end
+
+
+  def view
+    @group= Group.find(9)
+
+  end
+
+  def accept
+    user_group = UserGroup.find_by(user_id: params[:user_id], group_id: params[:group_id])
+    user_group.request= true
+    user_group.save
+    redirect_to approve_path
+  end
+
+
+  def delete
+    user_group = UserGroup.find_by(user_id: params[:user_id], group_id: params[:group_id])
+    user_group.destroy
+    redirect_to approve_path
+  end
     
-
- 
-
   def destroy
 
   end

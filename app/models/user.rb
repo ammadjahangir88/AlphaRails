@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validate :validate_username
   has_many :user_groups
   has_many :groups, through: :user_groups
+  
   def validate_username
     if User.where(email: user_name).exists?
       errors.add(:user_name, :invalid)
@@ -20,7 +21,13 @@ class User < ApplicationRecord
 
   def login
     @login || self.user_name || self.email
-  endx=group.users.where(id: current_user.id)(:username) || conditions.has_key?(:email)
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if (login = conditions.delete(:login))
+      where(conditions.to_h).where(["lower(user_name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end
   end

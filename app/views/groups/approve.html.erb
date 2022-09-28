@@ -1,0 +1,24 @@
+ 
+ 
+ <% @group.users.each do |user| %>
+ 
+
+     <% user_group = UserGroup.find_by(user_id:user.id, group_id: @group.id).request  %>
+      
+      <% if !user_group %>
+         
+         <div style="display:flex; flex-direction:row">
+         <%= user.user_name%>
+         <p style="margin-left:20px" >  <%= link_to "Accept Request", accept_path(user_id: user.id,group_id: @group.id) %> </p>
+          <p style="margin-left:20px" >  <%= link_to "Delete Request", delete_path(user_id: user.id,group_id: @group.id) %> </p>
+        </div>
+      <%end%>
+
+
+</p>
+
+
+
+
+
+<% end %>
