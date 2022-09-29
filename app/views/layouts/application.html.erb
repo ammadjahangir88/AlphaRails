@@ -16,7 +16,12 @@
   <body>
      <%  if current_user  %>
    <%= render "layouts/navigation" %>
-
+    <%= current_user.user_name%>
+    <% end %>
+    <% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
     <% end %>
     <div class="container">
     <%= yield %>

@@ -1,6 +1,5 @@
- 
- 
- <% @group.users.each do |user| %>
+<h1>JHje</h1>
+<% @group.users.each do |user| %>
  
 
      <% user_group = UserGroup.find_by(user_id:user.id, group_id: @group.id).request  %>
@@ -9,10 +8,11 @@
          
          <div style="display:flex; flex-direction:row">
          <%= user.user_name%>
-         <p style="margin-left:20px" >  <%= link_to "Accept Request", accept_path(user_id: user.id,group_id: @group.id) %> </p>
-          <p style="margin-left:20px" >  <%= link_to "Delete Request", delete_path(user_id: user.id,group_id: @group.id) %> </p>
+         <p style="margin-left:20px" >  <%= link_to "Accept Request", user_group_accept_path(user_id: user.id,group_id: @group.id) %> </p>
+          <p style="margin-left:20px" >  <%= link_to "Delete Request", user_group_delete_path(user_id: user.id,group_id: @group.id) %> </p>
         </div>
-      <%end%>
+
+<% end %>
 
 
 </p>

@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  
   def index
     @group=Group.all
   end
@@ -24,7 +25,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         # session[:user_id] = @user.id
-        format.html { redirect_to @group, notice: "Welcome to Alphablog " }
+        format.html { redirect_to user_group_path(current_user,@group), notice: "Welcome to Alphablog " }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -32,30 +33,31 @@ class GroupsController < ApplicationController
 
   end
   def join
-    @group= Group.find(4)
+    @group= Group.find(params[:group_id])
     @join = @group.user_groups.build(:user_id => current_user.id)
     respond_to do |format|
       if @join.save
-        format.html { redirect_to(group_path(@group), :notice => "You have joined this group.") }
+        format.html { redirect_to(user_group_path(current_user,@group), :notice => "You have joined this group.") }
         
       else
-        format.html { redirect_to(group_path(@group), :notice => "You have alreadu joined this group.") }
-        format.xml { render :xml => group_path(@group), :status => :unprocessable_entity }
+        format.html { redirect_to(user_group_path(current_user,@group), :notice => "You have alreadu joined this group.") }
+        format.xml { render :xml => user_group_path(current_user,@group), :status => :unprocessable_entity }
       end
     end
   end
   def joingroup
-    @group= Group.find(9)
+    
+    @group= Group.find(params[:group_id])
     @join = @group.user_groups.build(:user_id => current_user.id)
     @join.request=false
 
     respond_to do |format|
       if @join.save
-        format.html { redirect_to(group_path(@group), :notice => "You have joined this group.") }
+        format.html { redirect_to(user_group_path(current_user,@group), :notice => "You have joined this group.") }
         
       else
-        format.html { redirect_to(group_path(@group), :notice => "You have alreadu joined this group.") }
-        format.xml { render :xml => group_path(@group), :status => :unprocessable_entity }
+        format.html { redirect_to(user_group_path(current_user,@group), :notice => "You have alreadu joined this group.") }
+        format.xml { render :xml => user_group_path(current_user,@group), :status => :unprocessable_entity }
       end
     end
 
@@ -63,28 +65,27 @@ class GroupsController < ApplicationController
 
   end
   def approve
-    @group= Group.find(9)
+    @group= Group.find(params[:group_id])
   
   end
 
 
   def view
-    @group= Group.find(9)
-
+    @group= Group.find(params[:group_id])
   end
 
   def accept
     user_group = UserGroup.find_by(user_id: params[:user_id], group_id: params[:group_id])
     user_group.request= true
     user_group.save
-    redirect_to approve_path
+    redirect_to user_group_approve_path
   end
 
 
   def delete
     user_group = UserGroup.find_by(user_id: params[:user_id], group_id: params[:group_id])
     user_group.destroy
-    redirect_to approve_path
+    redirect_to user_group_approve_path
   end
     
   def destroy

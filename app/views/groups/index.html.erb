@@ -3,7 +3,7 @@
     <div style="display:flex; flex-direction:row">
     
 
-    <%= link_to group.name, group_path(group) %>
+    <%= link_to group.name, user_group_path(current_user,group) %>
     
      <p style="margin-left:20px">
      <% if group.id != 1 %>
@@ -16,11 +16,9 @@
 
        <%  if group.grouptype=='Public' %> 
 
-       <%= link_to "Join this group", join_path %>
+       <%= link_to "Join this group", user_group_join_path(group_id: group.id) %>
        <% elsif group.grouptype=='Private' %>
-         <%= link_to "Join this private group", joingroup_path %>
-
-      
+         <%= link_to "Join this private group", user_group_joingroup_path(group_id: group.id) %>
        <% end %>
     
 

@@ -1,15 +1,13 @@
 class ArticlesController < ApplicationController
-  def index
-    
-  end
+  
 
   def create
     @article = Article.new(article_params)
-    @article.group=Group.find(2)
+    @article.group=Group.find(params[:group_id])
     @article.user= current_user
         respond_to do |format|
         if @article.save
-            format.html { redirect_to article_path(@article), notice: "Atricle was successfully created." }  
+            format.html { redirect_to user_group_article_path(current_user,@article.group,@article), notice: "Atricle was successfully created." }  
           else
             format.html { render :new, status: :unprocessable_entity }
           end       
@@ -17,10 +15,16 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    @group = Group.find(params[:group_id])
     @article = Article.new
   end
 
   def destroy
+
+  end
+
+  def show
+
   end
   private
   def article_params
