@@ -4,10 +4,19 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.admin?
+    if user.has_role?:admin
       can :manage, :all
     else
       can :manage, Article, user_id:user.id
+      can :create, Article
+
+      can :update, Article do |Article|
+        article.user == user
+      end
+      can :destroy, Article do |Article|
+        article.user == user
+      end
+
       can :read, :all
 
 

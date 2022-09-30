@@ -13,14 +13,45 @@ class ArticlesController < ApplicationController
           end       
         end 
   end
+  def index
+
+    @articles=Article.all
+
+
+  end
 
   def new
     @group = Group.find(params[:group_id])
     @article = Article.new
   end
 
-  def destroy
+  def edit
+    @article= Article.find(params[:id])
+        
+  end
 
+  def update
+    @article= Article.find(params[:id])
+     
+      respond_to do |format|
+          if @article.update(article_params)
+              format.html { redirect_to user_article_path(current_user,@article), notice: "Atricle was successfully Updated." }  
+            else
+              format.html { render :new, status: :unprocessable_entity }
+            end       
+          end 
+  end
+ 
+
+
+
+ 
+  def destroy
+  
+    @article= Article.find(params[:id])
+    @article.destroy
+    flash[:notice]="Article was successfully deleted"
+    redirect_to user_articles_path
   end
 
   def show
