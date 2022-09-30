@@ -10,10 +10,10 @@ class Ability
       can :manage, Article, user_id:user.id
       can :create, Article
 
-      can :update, Article do |Article|
+      can :update, Article do |article|
         article.user == user
       end
-      can :destroy, Article do |Article|
+      can :destroy, Article do |article|
         article.user == user
       end
 
