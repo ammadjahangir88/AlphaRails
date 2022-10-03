@@ -36,6 +36,7 @@ class GroupsController < ApplicationController
     @join = @group.user_groups.build(:user_id => current_user.id)
     respond_to do |format|
       if @join.save
+        CrudNotificationMailer.ongroupcreatenotification(@group).deliver_now
         format.html { redirect_to(user_group_path(current_user,@group), :notice => "You have joined this group.") }
         
       else

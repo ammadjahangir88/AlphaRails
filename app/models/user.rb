@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :user_groups
   has_many :groups, through: :user_groups
   has_many :comments , dependent: :destroy
-  
+  has_one_attached :image
   def validate_username
     if User.where(email: user_name).exists?
       errors.add(:user_name, :invalid)

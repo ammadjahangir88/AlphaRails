@@ -18,6 +18,7 @@
      <%  if current_user  %>
    <%= render "layouts/navigation" %>
     <%= current_user.user_name%>
+    <%= image_tag(current_user.image ,style:"width:250px; height:250px" )   %>
     <% end %>
     <% flash.each do |type, msg| %>
   <div>

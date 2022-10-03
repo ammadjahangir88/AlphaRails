@@ -1,5 +1,4 @@
 <% @group.users.each do |user| %>
- 
 
      <% user_group = UserGroup.find_by(user_id:user.id, group_id: @group.id).request  %>
       
