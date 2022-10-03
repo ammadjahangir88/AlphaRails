@@ -2,7 +2,7 @@
 <div style=" display: flex; flex-wrap: wrap;">
 <% @group.each do |group| %>
 
-    <div style=" flex: 0 0 29.33%;margin: 20px; border: 2px blue solid; justify-content: center;">
+    <div style=" flex: 0 0 29.33%;margin: 20px; border: 2px black solid; justify-content: center;">
     
 
     <%= link_to group.name, user_group_path(current_user,group) %>
@@ -61,7 +61,7 @@
      <p style="margin-left:120px"> <%= group.grouptype %>   </p>
     <p style="margin-left:120px"> <%= group.user.user_name %>   </p>
      
-    <%= link_to image_tag(group.image,style:"width:250px; height:250px"),user_group_path(current_user,group) %>
+    <%= image_tag(group.image,style:"width:250px; height:250px") %>
     
     </div>
 
