@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'comments/new'
+  get 'comments/index'
 
   devise_for :users 
 
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  root 'welcome#home'
+  root 'groups#index'
 
 
    
@@ -19,6 +21,9 @@ Rails.application.routes.draw do
      resources :groups do 
     
       resources :articles do 
+        resources :comments do
+          
+        end
         
       end
      
@@ -32,11 +37,6 @@ Rails.application.routes.draw do
    end
  
 
-   resources  :users do
-    resources :articles  do
-     
-    end
-  end
     
    
 

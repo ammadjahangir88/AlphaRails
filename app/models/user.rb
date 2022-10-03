@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validate :validate_username
   has_many :user_groups
   has_many :groups, through: :user_groups
+  has_many :comments , dependent: :destroy
   
   def validate_username
     if User.where(email: user_name).exists?

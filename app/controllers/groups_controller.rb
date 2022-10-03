@@ -52,7 +52,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @join.save
-        format.html { redirect_to(user_group_path(current_user,@group), :notice => "You have joined this group.") }
+        format.html { redirect_to(user_group_path(current_user,@group), :notice => "Request sent succesfully") }
         
       else
         format.html { redirect_to(user_group_path(current_user,@group), :notice => "You have alreadu joined this group.") }
@@ -92,6 +92,6 @@ class GroupsController < ApplicationController
   end
   private
   def group_params
-    params.require(:group).permit(:name,:grouptype)
+    params.require(:group).permit(:name,:grouptype,:image)
   end
 end

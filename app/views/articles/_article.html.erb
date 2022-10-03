@@ -8,7 +8,7 @@
     
     <div class="article-title">
     
-    <%= link_to article.title, user_article_path(current_user,article) %>
+    <%= link_to article.title, user_group_article_path(current_user,article) %>
     
     </div>
     
@@ -29,16 +29,16 @@ last updated: <%= time_ago_in_words(article.updated_at) %> ago</small>
 
    
     <div class="display:flex, flex-direction:row">
-    <%= link_to "View this articles", user_article_path(current_user,article), class: "btn btn-xs btn-success" %> 
+    <%= link_to "View this articles", user_group_article_path(current_user,article.group,article), class: "btn btn-xs btn-success" %> 
     <% if can? :update, article%>
     <%= link_to "Edit this article", 
-     edit_user_article_path(current_user,article), class: "btn btn-xs btn-primary" %>
+     edit_user_group_article_path(current_user,article.group,article), class: "btn btn-xs btn-primary" %>
     <% end %>
   <%#= link_to "Delete this article", user_article_path(current_user,article),turbo_method: :delete,
               data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
               class:"effect effect-5" %>
     <% if can? :destroy, article%>
-    <%= button_to "Delete this article", user_article_path(current_user,article), method: :delete,
+    <%= button_to "Delete this article", user_group_article_path(current_user,article.group,article), method: :delete,
               data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  ,class: "btn btn-xs btn-danger"  %>
     <% end %>
     </div>

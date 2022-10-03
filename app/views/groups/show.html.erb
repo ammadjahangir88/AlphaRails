@@ -3,7 +3,13 @@
 <%= link_to "Approve Members", user_group_approve_path(current_user,@group.id) %>
 <%= link_to "View All Members", user_group_view_path(current_user,@group.id) %>
 
-<%= link_to "New Article", new_user_group_article_path(current_user,@group) %>
-<%= render 'articles/article', obj: @group.articles %>
-
  <% end %>
+
+<% x=@group.users.where(id: current_user.id)%>
+
+ <% if current_user == x[0]%>
+<%= link_to "New Article", new_user_group_article_path(current_user,@group) %>
+
+<% end %>
+
+<%= render 'articles/article', obj: @group.articles %>
